@@ -8,20 +8,23 @@ import { LoginComponent } from './login/login.component';
 
 import {AuthService} from './services/auth.service';
 import { HomeComponent } from './home/home.component';
-import { LocalStorageModule } from 'angular-2-local-storage';
+//import { LocalStorageModule } from 'angular-2-local-storage';
 import { AuthHttp,AuthConfig} from 'angular2-jwt';
 import { Http, RequestOptions } from '@angular/http';
 import {ApiService} from './services/api.service';
 import { ClubsNearByComponent } from './home/clubs-near-by.component';
+import { ClubsComponent } from './clubs/clubs.component';
+import { MembersComponent } from './members/members.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
  return new AuthHttp(new AuthConfig({
   tokenName: 'id_token',
-    noJwtError: true,
+  //  noJwtError: true,
 		tokenGetter: (() => localStorage.getItem('id_token')),
 		globalHeaders: [{'Content-Type':'application/json'}],
 	}), http, options);
 }
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,23 +35,31 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
     
     ClubsNearByComponent,
+    
+
+    
+    ClubsComponent,
+    
+
+    
+    MembersComponent,
    
   ],
   imports: [
-    LocalStorageModule.withConfig({
-            prefix: '',
-            storageType: 'localStorage'
-        }),
+    // LocalStorageModule.withConfig({
+    //         prefix: '',
+    //         storageType: 'localStorage'
+    //     }),
     BrowserModule,
     FormsModule,
     HttpModule,
     myRoutes
   ],
-  providers: [AuthService ,{
+  providers: [AuthService,{
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
       deps: [Http, RequestOptions]
-    },ApiService],
+    },ApiService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

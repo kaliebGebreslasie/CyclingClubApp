@@ -1,4 +1,37 @@
 
-<h1>
-  {{title}}
-</h1>
+    <div class="navbar-header">
+    <!--<a class="navbar-brand" href="#">Auth0 - Angular 2</a>-->  
+    <button class="tablinks" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</button>
+   
+  </div>
+  <div *ngIf="auth.authenticated() && auth.userProfile" >
+  <div class="tab">
+  <button class="tablinks"  id="defaultOpen">Home</button>
+  <button class="tablinks" >link1</button>
+  <button class="tablinks" >link2</button>
+   <button class="tablinks" (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</button>
+</div>
+
+<div id="London" class="tabcontent">
+  <h3>London</h3>
+  <p>London is the capital city of England.</p>
+</div>
+
+<div id="Paris" class="tabcontent">
+  <h3>Paris</h3>
+  <p>Paris is the capital of France.</p> 
+</div>
+<div></div>
+<div class="vertical-menu">
+ 
+ <a [routerLink]="['clubsNearBY']">Clubs Near By </a>
+  <a href="#">Link 2</a>
+  <a href="#">Link 3</a>
+  <a href="#">Link 4</a>
+</div>
+<a [routerLink]="['api/users']">users </a>
+   
+
+    
+     <router-outlet></router-outlet>
+  </div>

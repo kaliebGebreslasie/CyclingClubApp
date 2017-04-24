@@ -7,7 +7,7 @@ import{Http} from '@angular/http';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private http:Http) { }
+  constructor() { }
 
   ngOnInit() {
    

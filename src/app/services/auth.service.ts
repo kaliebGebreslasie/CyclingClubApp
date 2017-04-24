@@ -1,31 +1,63 @@
 import { Injectable } from '@angular/core';
-declare var Auth0Lock: any
+
+import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
+
+import { Router, NavigationStart } from '@angular/router';
+import 'rxjs/add/operator/filter';
+
+// Avoid name not found warnings
+declare var Auth0Lock: any;
+
 @Injectable()
 export class AuthService {
+  // Configure Auth0
+   lock = new Auth0Lock('fuAkz6gQf9qEkPxRNdacG9xpsT6Zy05R', 'michael10.auth0.com', {});
 
-  lock = new Auth0Lock('WnoqRrrS5k6PX7o67juJi0hDlzCvudls', 'kalebgebre.auth0.com');
+ 
+  //Store profile object in auth class
+  userProfile: Object;
 
- login() {
-   this.lock.show((error: string, profile: Object, id_token: string) => {
-     if (error) {
-       console.log(error);
-     }
-     // We get a profile object for the user from Auth0
-     window.localStorage.setItem('profile', JSON.stringify(profile));
-   //   window.sessionStorage.setItem('profile',"hello");
-     // localStorage['profile']=JSON.stringify(profile)
-     console.log("profile"+profile);
-     // We also get the user's JWT
-     localStorage.setItem('id_token', id_token);
-     console.log("id_token"+id_token);
-   });
- }
+  constructor() {
+    // Set userProfile attribute of already saved profile
+    this.userProfile = JSON.parse(localStorage.getItem('profile'));
 
- logout() {
-   // To log out, we just need to remove
-   // the user's profile and token
-   localStorage.removeItem('profile');
-   localStorage.removeItem('id_token');
- }
+    // Add callback for the Lock `authenticated` event
+    this.lock.on("authenticated", (authResult) => {
+      localStorage.setItem('id_token', authResult.idToken);
 
+      // Fetch profile information
+      this.lock.getProfile(authResult.idToken, (error, profile) => {
+        if (error) {
+          // Handle error
+          alert(error);
+          return;
+        }
+
+        localStorage.setItem('profile', JSON.stringify(profile));
+        this.userProfile = profile;
+      });
+    });
+  }
+
+
+
+  public login() {
+    // Call the show method to display the widget.
+     console.log("before")
+  console.log(localStorage.getItem('profile'))
+    this.lock.show()
+  }
+
+  public authenticated() {
+    // Check if there's an unexpired JWT
+    // This searches for an item in localStorage with key == 'id_token'
+    return tokenNotExpired('id_token');
+  }
+
+  public logout() {
+    // Remove token from localStorage
+    localStorage.removeItem('id_token');
+    localStorage.removeItem('profile');
+    this.userProfile = undefined;
+  }
 }
