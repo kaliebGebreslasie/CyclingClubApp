@@ -64,3 +64,11 @@ div.tab button.active {
      float:right;
     padding-right:10px;
 }
+.test {
+   border: 2px solid #ccc;
+   width: 83%;
+   height: 100%;
+     float:right;
+    padding-right:10px;
+    
+}

@@ -13,12 +13,15 @@ export class ApiService {
     return   this.authHttp.get(path);
   }
 
-  sendData(path:string,data:{}){
+  postData(path:string,data:any){
+ return   this.authHttp.post(path,data);
+}
+ 
+ sendData(path:string,data:{}){
     let headers = new Headers({'Content-Type': 'application/json'});  
  headers.append('Authorization','Bearer ')
  let options = new RequestOptions({headers: headers});
     console.log("path"+path);
     return this.authHttp.post(path,data,options);
   }
- 
 }
