@@ -3,51 +3,37 @@ import {ApiService} from '../services/api.service';
 @Component({
   selector: 'app-clubs-near-by',
   template: `
-  <style>
-.vertical-menu {
-    width: 200px;
-}
-
-.vertical-menu a {
-    background-color: #eee;
-    color: black;
-    display: block;
-    padding: 12px;
-    text-decoration: none;
-}
-
-.vertical-menu a:hover {
-    background-color: #ccc;
-}
-
-.vertical-menu a.active {
-    background-color: #4CAF50;
-    color: white;
-}
-</style>
-     <div *ngIf="clubs">
-      clubs-near-by Works!
-        </div>
-
-<div class="vertical-menu" *ngFor="let club of clubs">
-  <a href="#">{{club.clubname}}</a>
+   
+        <div class="container" *ngIf="clubs">
+  <div class="well">Nearby Clubs</div>
+</div>
+  <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let club of clubs" >{{club.clubname}}<span class="pull-right"><button class="btn" name="join" (click)="join(club)">Join</button></span></li>
+    
+</ul>
+<!--<div class="vertical-menu" *ngFor="let club of clubs">
+  {{club.clubname}}<button name="join" (click)="join(club)">Join</button>
 </div>
       
      
-   <div *ngIf="clubs==false"><a href="" >New Club<a>
+   <div *ngIf="clubs==false"><a href="" >New Club<a> -->
   `,
   styles: []
 })
 export class ClubsNearByComponent implements OnInit {
   location = {};
 clubs:any[];
+member:{};
+profile:any;
   constructor(private apiService:ApiService ) {
 
 
    }
  setPosition(position){
+   console.log("wint");
       this.location = position.coords;
       console.log(  position.coords);
+      //position.coords.latituted
       this.apiService.getData("http://localhost:4000/api/clubsNearBy?lat="+position.coords.latitude+"&long="+position.coords.longitude)
       .subscribe(res=>{console.log(res.json());
 this.clubs=res.json();
@@ -55,10 +41,27 @@ this.clubs=res.json();
 
       }
   ngOnInit() {
+    console.log("winttttttt");
      if(navigator.geolocation){
-      navigator.geolocation.getCurrentPosition(this.setPosition.bind(this));
+       let a={maximumAge:60000, timeout: 30000};
+          this.apiService.getData("http://localhost:4000/api/clubsNearBy?lat="+41.0178+"&long="+-91.966)
+      .subscribe(res=>{console.log(res.json());
+this.clubs=res.json();
+      });
+
+   //   navigator.geolocation.getCurrentPosition(this.setPosition,(err)=>console.log("err"+err),{timeout: 3000000});
       };
    }
-  
+  join(club){
+   this.profile=JSON.parse(localStorage.getItem('profile'));
+   
+console.log((this.profile).name);
+this.member={name:this.profile.name,email:this.profile.email,picture:this.profile.picture,clubname:club.clubname};
+this.apiService.sendData("http://localhost:4000/api/joinClub",this.member).subscribe(
+      data => console.log(data),
+      err => console.log(err),
+      () => console.log('Request Complete')
+    );;
+  }
 
 }
