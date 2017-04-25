@@ -11,5 +11,8 @@ export class ApiService {
   getData(path:string){
     return   this.authHttp.get(path);
   }
+  postData(path:string,data:any){
+ return   this.authHttp.post(path,data);
+  }
  
 }

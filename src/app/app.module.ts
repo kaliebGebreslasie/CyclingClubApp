@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { myRoutes } from './app.routes';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import {AuthService} from './services/auth.service';
 import { HomeComponent } from './home/home.component';
 //import { LocalStorageModule } from 'angular-2-local-storage';
@@ -15,6 +15,10 @@ import {ApiService} from './services/api.service';
 import { ClubsNearByComponent } from './home/clubs-near-by.component';
 import { ClubsComponent } from './clubs/clubs.component';
 import { MembersComponent } from './members/members.component';
+import { EventpostComponent } from './eventpost/eventpost.component';
+import { AnnouncmentpostComponent } from './announcmentpost/announcmentpost.component';
+import { NewclubComponent } from './newclub/newclub.component';
+import { EventgetComponent } from './eventget/eventget.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
  return new AuthHttp(new AuthConfig({
@@ -43,6 +47,22 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
     
     MembersComponent,
+    
+
+    
+    EventpostComponent,
+    
+
+    
+    AnnouncmentpostComponent,
+    
+
+    
+    NewclubComponent,
+    
+
+    
+    EventgetComponent,
    
   ],
   imports: [
@@ -53,7 +73,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     BrowserModule,
     FormsModule,
     HttpModule,
-    myRoutes
+    myRoutes,
+    ReactiveFormsModule
   ],
   providers: [AuthService,{
       provide: AuthHttp,
