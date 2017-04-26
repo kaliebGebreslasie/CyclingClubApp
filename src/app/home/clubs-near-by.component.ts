@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-clubs-near-by',
   template: `
+<<<<<<< HEAD
         <div *ngIf="clubs">
   <div class="well">Nearby Clubs</div>
 </div>
@@ -11,6 +12,14 @@ import { Router } from '@angular/router';
   <input class="form-control"  #myInput placeholder="Search ..." [(ngModel)]="name" (input)="filterItem(myInput.value)"/>
 
                     <li class="list-group-item" *ngFor="let club of filteredclubs" >{{club.clubname}}<span class="pull-right">
+=======
+ 
+        <div class="container" *ngIf="clubs">
+  <div class="well">Nearby Clubs</div>
+</div>
+  <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let club of clubs" >{{club.clubname}}<span class="pull-right">
+>>>>>>> bbe222c986a8e4805fd7b1f8191bd71ff3c52a02
                     <button class="btn" name="join" (click)="join(club)">Join</button></span></li>
     
 </ul>
@@ -48,7 +57,7 @@ this.clubs=res.json();
 
       }
   ngOnInit() {
-    console.log("winttttttt");
+  
      if(navigator.geolocation){
        let a={maximumAge:60000, timeout: 30000};
           this.apiService.getData("http://localhost:4000/api/clubsNearBy?lat="+41.0178+"&long="+-91.966)
@@ -57,7 +66,7 @@ this.clubs=res.json();
 this.assignCopy()
 
 
-      });
+      },err=>console.log("err"+err));
 
    //   navigator.geolocation.getCurrentPosition(this.setPosition,(err)=>console.log("err"+err),{timeout: 3000000});
       };
@@ -66,6 +75,7 @@ this.assignCopy()
    this.profile=JSON.parse(localStorage.getItem('profile'));
    
 console.log((this.profile).name);
+
 this.member={name:this.profile.name,email:this.profile.email,picture:this.profile.picture,clubname:club.clubname};
 this.apiService.sendData("http://localhost:4000/api/joinClub",this.member).subscribe(
       data => console.log(data),

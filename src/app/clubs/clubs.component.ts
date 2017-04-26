@@ -8,6 +8,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 @Component({
   selector: 'app-clubs',
   template: `
+
   
     <div class="" *ngIf="events">
      <div class="well">{{clubname}}
@@ -19,9 +20,18 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 
 </div>
 <ul>        
-                    <li class="list-group-item" *ngFor="let event of events ">{{event.event}}<span class="pull-right">
+                 <!--   <li class="list-group-item" *ngFor="let event of events ">{{event.event}}<span class="pull-right">
                     <button *ngIf="condition(event)"  class = "btn btn-primary" name="join" (click)="join(event)">Join</button>
-                    <button *ngIf="!condition(event)"  class = "btn btn-primary" name="join" (click)="startRide(club)">Start Ride</button></span></li>
+                    <button *ngIf="!condition(event)"  class = "btn btn-primary" name="join" (click)="startRide(club)">Start Ride</button></span></li>-->
+
+
+ <!-- <div class="well" *ngIf="events">All Events</div>-->
+<!-- </div>-->
+  <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let event of events" >{{event.event}}<span class="pull-right">
+                    <button *ngIf="condition(event) && show"  class = "btn btn-primary" name="join" (click)="join(event)">Join</button>
+                    <button *ngIf="!conditionStart(event)"  class = "btn btn-primary" name="join" (click)="startRide(event)">Start Ride</button></span></li>
+
     
 </ul>
    <button (click)="addEvent()">AddNewEvent</button> <br>
@@ -45,12 +55,15 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 })
 export class ClubsComponent implements OnInit {
 
-  club; eventdata; events;clubname;router; myForm: FormGroup;
+  event;club; eventdata; events;clubname;router; myForm: FormGroup;
   _service;
   formCondition = false;formCondition1=false;
   private subscription: Subscription;
+  show:boolean=true;
+  //showJoin:
 
   constructor(private activatedRoute: ActivatedRoute, fb: FormBuilder, _service: ApiService, router:Router) {
+    
     ///////////////////////form group////////////
     this.router=router;
     this._service = _service;
@@ -61,15 +74,21 @@ export class ClubsComponent implements OnInit {
     console.log("khsfdlkahfsdakfdskjfhaksdjHsdfjhl");
     
     //////////////param/////////////////////////
+
     this.subscription = activatedRoute.queryParams.subscribe(
       //(param: any) => this.club = param['club']
       (param: any) => {this.club = param['club']
       console.log(this.club);}
       
+
     );
-    this.events = JSON.parse(this.club).events;
+    
+      this.events = JSON.parse(this.club).events;
     this.clubname=JSON.parse(this.club).clubname;
     console.log(this.clubname);
+      
+  
+   
     
     
   }
@@ -80,7 +99,15 @@ export class ClubsComponent implements OnInit {
   }
   ///////////////////////////join & start button///////////////////////
   condition(event) {
-    if (event.owner == JSON.parse(localStorage.getItem('profile')).name) {
+    if ((event.owner == JSON.parse(localStorage.getItem('profile')).name ||
+    event.members.indexOf(JSON.parse(localStorage.getItem('profile')).name)>-1)&&this.show==true) {
+      return false;
+    }
+    return true;
+  }
+  
+  conditionStart(event) {
+    if (event.owner == JSON.parse(localStorage.getItem('profile')).name ) {
       return false;
     }
     return true;
@@ -110,15 +137,23 @@ export class ClubsComponent implements OnInit {
     this.events.push(this.eventdata)});
   }
 
-  startRide(club ){
-      var C=JSON.stringify(club);
-      var E=this.events;
-      console.log(E);
+
+  // startRide(club ){
+  //     var C=JSON.stringify(club);
+  //     var E=this.events;
+  //     console.log(E);
+
+  startRide(event ){
+      var E=JSON.stringify(event);
+      var C=JSON.stringify(this.club);
+
+
       
  this.router.navigate(['api','startRide',C,E]);
 
     /////club this event
   }
+
   announcement(){
      this.router.navigate(['club','announcement'],{queryParams: {club: this.club}});
       
@@ -128,6 +163,20 @@ export class ClubsComponent implements OnInit {
       }
 
 
+
+
+  join(event){
+console.log(this.club);
+    let data={
+      clubname:JSON.parse(this.club).clubname,
+      eventname:event.eventname,
+      member:JSON.parse(localStorage.getItem('profile')).name
+    }
+      this._service.postData("http://localhost:4000/api/joinEvent", data).subscribe(data => {console.log(data.json())},(err)=>console.log(err)); 
+      this.show=false;
+      this.show=true;
+
+  }
 
 
   ngOnInit() {

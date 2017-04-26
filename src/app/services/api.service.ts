@@ -10,6 +10,7 @@ export class ApiService {
   
   }
   getData(path:string){
+      console.log("kkkkkk");
     return   this.authHttp.get(path);
   }
 

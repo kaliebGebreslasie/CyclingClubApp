@@ -15,24 +15,29 @@ import { ClubsComponent } from './clubs/clubs.component';
 import { MemberdetailsComponent } from './memberdetails/memberdetails.component';
 
 import {StartrideComponent} from './startride/startride.component';
-
+import {LiverideComponent} from './liveride/liveride.component';
 const MY_ROUTES: Routes = [
   //   { path: '', component: AppComponent },
 
   { path: 'home', component: HomeComponent },
   // { path: 'login', component: LoginComponent },
   { path: 'clubsNearBY', component: ClubsNearByComponent },
-  { path: 'startRide', component: StartrideComponent },
+  { path: 'api/startRide/:club/:event', component: StartrideComponent },
   { path: 'api/users', component: MembersComponent },
   { path: 'api/addevent', component: EventpostComponent },
  // { path: 'api/announcement', component: AnnouncmentpostComponent },
   { path: 'api/newclub', component: NewclubComponent },
   { path: 'api/getevent', component: EventgetComponent },
+
   { path: 'club', component: ClubsComponent },
     { path: 'club/announcement', component: AnnouncmentpostComponent },
     { path: 'club/userdetails', component: MemberdetailsComponent },
    { path: 'api/startRide/:club/:event', component: ClubsComponent },
      { path: 'club/newClub', component: NewclubComponent },
+
+  { path: 'api/clubs/:club', component: ClubsComponent },
+  { path: 'liveRide', component: LiverideComponent },
+  // { path: 'api/startRide/:club/:event', component: ClubsComponent },
 
 
 

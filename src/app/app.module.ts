@@ -21,8 +21,12 @@ import { NewclubComponent } from './newclub/newclub.component';
 import { EventgetComponent } from './eventget/eventget.component';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { StartrideComponent } from './startride/startride.component';
+
 import { MemberdetailsComponent } from './memberdetails/memberdetails.component';
 import { MyPipePipe } from './my-pipe.pipe';
+
+import { LiverideComponent } from './liveride/liveride.component';
+
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
  return new AuthHttp(new AuthConfig({
@@ -73,12 +77,16 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     StartrideComponent,
     
 
- 
+
     MemberdetailsComponent,
     
 
  
     MyPipePipe,
+
+    
+    LiverideComponent,
+
 
 
    
