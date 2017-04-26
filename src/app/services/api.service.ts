@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable,EventEmitter } from '@angular/core';
 import{Http} from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 import {RequestOptions} from '@angular/http';
@@ -24,4 +24,14 @@ export class ApiService {
     console.log("path"+path);
     return this.authHttp.post(path,data,options);
   }
+
+pushedData=new EventEmitter<any>();
+
+pushData(value:any){
+
+  console.log(value+" this is fro value");
+  
+ // this.pushedData.emit("value");
+}
+
 }

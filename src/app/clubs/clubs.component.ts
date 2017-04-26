@@ -8,12 +8,19 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 @Component({
   selector: 'app-clubs',
   template: `
-    <div class="container" *ngIf="events">
-  <div class="well">All Events</div>
+  
+    <div class="" *ngIf="events">
+     <div class="well">{{clubname}}
+     <div class="pull-right">
+        <button class="btn btn-primary" (click)="announcement()"> announcement</button>  
+        <button class="btn btn-primary" (click)="userDetails()"> Members</button>
+     </div>
+     </div>
+
 </div>
-  <ul class="list-group">
-                    <li class="list-group-item" *ngFor="let event of events" >{{event.event}}<span class="pull-right">
-                    <button *ngIf="condition(event)"  class = "btn btn-primary" name="join" (click)="join(club)">Join</button>
+<ul>        
+                    <li class="list-group-item" *ngFor="let event of events ">{{event.event}}<span class="pull-right">
+                    <button *ngIf="condition(event)"  class = "btn btn-primary" name="join" (click)="join(event)">Join</button>
                     <button *ngIf="!condition(event)"  class = "btn btn-primary" name="join" (click)="startRide(club)">Start Ride</button></span></li>
     
 </ul>
@@ -31,9 +38,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
     <input type="submit" value="Post"  class = "btn btn-primary" [disabled]="!myForm.valid" />
 
   </form>
-</div>
-      
-     
+
 
   `,
   styles: []
@@ -42,7 +47,7 @@ export class ClubsComponent implements OnInit {
 
   club; eventdata; events;clubname;router; myForm: FormGroup;
   _service;
-  formCondition = false;
+  formCondition = false;formCondition1=false;
   private subscription: Subscription;
 
   constructor(private activatedRoute: ActivatedRoute, fb: FormBuilder, _service: ApiService, router:Router) {
@@ -53,9 +58,14 @@ export class ClubsComponent implements OnInit {
       name: ['', Validators.required],
       post: ['', Validators.compose([Validators.required, this.validatePost])]
     });
+    console.log("khsfdlkahfsdakfdskjfhaksdjHsdfjhl");
+    
     //////////////param/////////////////////////
-    this.subscription = activatedRoute.params.subscribe(
-      (param: any) => this.club = param['club']
+    this.subscription = activatedRoute.queryParams.subscribe(
+      //(param: any) => this.club = param['club']
+      (param: any) => {this.club = param['club']
+      console.log(this.club);}
+      
     );
     this.events = JSON.parse(this.club).events;
     this.clubname=JSON.parse(this.club).clubname;
@@ -75,6 +85,7 @@ export class ClubsComponent implements OnInit {
     }
     return true;
   }
+  
   /////////////////////validator//////////////////////////
   validatePost(control: FormControl) {
     if (control.value.Length < 10) {
@@ -102,14 +113,25 @@ export class ClubsComponent implements OnInit {
   startRide(club ){
       var C=JSON.stringify(club);
       var E=this.events;
-
+      console.log(E);
       
-    this.router.navigate(['api','startRide',C,E]);
+ this.router.navigate(['api','startRide',C,E]);
 
     /////club this event
   }
+  announcement(){
+     this.router.navigate(['club','announcement'],{queryParams: {club: this.club}});
+      
+  }
+  userDetails(){
+     this.router.navigate(['club','userdetails'],{queryParams: {club: this.club}});
+      }
+
+
+
 
   ngOnInit() {
+
   }
 
 

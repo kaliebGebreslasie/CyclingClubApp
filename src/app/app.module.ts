@@ -21,6 +21,8 @@ import { NewclubComponent } from './newclub/newclub.component';
 import { EventgetComponent } from './eventget/eventget.component';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { StartrideComponent } from './startride/startride.component';
+import { MemberdetailsComponent } from './memberdetails/memberdetails.component';
+import { MyPipePipe } from './my-pipe.pipe';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
  return new AuthHttp(new AuthConfig({
@@ -38,7 +40,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     
     HomeComponent,
     
-
+    MyPipePipe,
     
     ClubsNearByComponent,
     
@@ -67,8 +69,16 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     EventgetComponent,
     
 
-    
+ 
     StartrideComponent,
+    
+
+ 
+    MemberdetailsComponent,
+    
+
+ 
+    MyPipePipe,
 
 
    
@@ -82,6 +92,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     FormsModule,
     HttpModule,
     myRoutes,
+  
     ReactiveFormsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCCWerYWeQRugBVFH4cOMYNomdY6Pa3bRg'
