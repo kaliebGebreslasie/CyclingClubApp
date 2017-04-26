@@ -19,6 +19,8 @@ import { EventpostComponent } from './eventpost/eventpost.component';
 import { AnnouncmentpostComponent } from './announcmentpost/announcmentpost.component';
 import { NewclubComponent } from './newclub/newclub.component';
 import { EventgetComponent } from './eventget/eventget.component';
+import { AgmCoreModule } from 'angular2-google-maps/core';
+import { StartrideComponent } from './startride/startride.component';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
  return new AuthHttp(new AuthConfig({
@@ -63,6 +65,12 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
     
     EventgetComponent,
+    
+
+    
+    StartrideComponent,
+
+
    
   ],
   imports: [
@@ -74,7 +82,10 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     FormsModule,
     HttpModule,
     myRoutes,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCCWerYWeQRugBVFH4cOMYNomdY6Pa3bRg'
+    })
   ],
   providers: [AuthService,{
       provide: AuthHttp,

@@ -1,8 +1,32 @@
 <div class="navbar-header">
-    <!--<a class="navbar-brand" href="#">Auth0 - Angular 2</a>-->  
-    <button class="tablinks" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</button>
-   <!--<button class="tablinks" (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</button>-->
+<div *ngIf="!auth.authenticated()">
 
+<nav class= "navbar navbar-inverse"  >
+  <div class= "container-fluid">
+       <div class= "navbar-header">
+         <h4>Cycling Club.. The number one rated sports association in the land!</h4>
+       </div>
+  </div>
+  </nav>
+
+<div class="container">        
+  <img src="../assets/images/home.jpg" class="img-rounded" alt="Cinque Terre" width="1000" height="130"> 
+</div>
+<div>
+
+    <div class="text-center">
+        <button type = "button" class = "btn btn-primary" (click)="auth.login()" >Login with Google account</button>    
+    </div>
+    
+</div>
+
+</div>
+
+
+    <!--<a class="navbar-brand" href="#">Auth0 - Angular 2</a>-->  
+   <!-- <button class="tablinks" (click)="auth.login()" *ngIf="!auth.authenticated()">Log In</button>-->
+   <!--<button class="tablinks" (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</button>-->
+<!--
 <a [routerLink]="['clubsNearBY']">Clubs Near By </a>
   <a href="#">Link 2</a>
   <a href="#">Link 3</a>
@@ -15,7 +39,7 @@
      
      <div>
 
-  </div>
+  </div> -->
   <div *ngIf="auth.authenticated() && auth.userProfile" >
     <nav class= "navbar navbar-inverse">
      <div class= "container-fluid">
@@ -57,7 +81,7 @@
           <ul class="nav nav-sidebar">
             <li class="active"><a [routerLink]="['clubsNearBY']">Near By Clubs <span class="sr-only">(current)</span></a></li>
             <li><a href="#">Events</a></li>
-            <li><a href="#">Live Rides</a></li>
+            <li><a [routerLink]="['startRide']">Start Ride</a></li>
             <li><a href="#">Emergency</a></li>
           </ul>
           <ul class="nav nav-sidebar">
