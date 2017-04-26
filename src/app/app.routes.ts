@@ -10,7 +10,11 @@ import { EventpostComponent } from './eventpost/eventpost.component';
 import { AnnouncmentpostComponent } from './announcmentpost/announcmentpost.component';
 import { NewclubComponent } from './newclub/newclub.component';
 import { EventgetComponent } from './eventget/eventget.component';
+
 import { ClubsComponent } from './clubs/clubs.component';
+
+
+import {StartrideComponent} from './startride/startride.component';
 
 const MY_ROUTES: Routes = [
   //   { path: '', component: AppComponent },
@@ -18,6 +22,7 @@ const MY_ROUTES: Routes = [
   { path: 'home', component: HomeComponent },
   // { path: 'login', component: LoginComponent },
   { path: 'clubsNearBY', component: ClubsNearByComponent },
+  { path: 'startRide', component: StartrideComponent },
   { path: 'api/users', component: MembersComponent },
   { path: 'api/addevent', component: EventpostComponent },
   { path: 'api/addannouncement', component: AnnouncmentpostComponent },

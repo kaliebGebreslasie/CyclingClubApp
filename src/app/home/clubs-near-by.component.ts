@@ -18,7 +18,8 @@ import { Router } from '@angular/router';
       
      
    <div *ngIf="clubs==false"><a href="" >New Club<a> -->
-  `,
+  `
+  ,
   styles: []
 })
 export class ClubsNearByComponent implements OnInit {

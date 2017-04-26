@@ -39,11 +39,6 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
   styles: []
 })
 export class ClubsComponent implements OnInit {
-////////////////////////////////////////////////////
-
-
-
-//////////////////////////////////////////
 
   club; eventdata; events;clubname;router; myForm: FormGroup;
   _service;
