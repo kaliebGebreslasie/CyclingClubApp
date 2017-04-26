@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from '../services/api.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-clubs-near-by',
   template: `
@@ -21,12 +22,13 @@ import {ApiService} from '../services/api.service';
   styles: []
 })
 export class ClubsNearByComponent implements OnInit {
+  router;
   location = {};
 clubs:any[];
 member:{};
 profile:any;
-  constructor(private apiService:ApiService ) {
-
+  constructor(private apiService:ApiService,private Router:Router ) {
+this.router=Router;
 
    }
  setPosition(position){
@@ -37,6 +39,7 @@ profile:any;
       this.apiService.getData("http://localhost:4000/api/clubsNearBy?lat="+position.coords.latitude+"&long="+position.coords.longitude)
       .subscribe(res=>{console.log(res.json());
 this.clubs=res.json();
+
       });
 
       }
@@ -45,8 +48,10 @@ this.clubs=res.json();
      if(navigator.geolocation){
        let a={maximumAge:60000, timeout: 30000};
           this.apiService.getData("http://localhost:4000/api/clubsNearBy?lat="+41.0178+"&long="+-91.966)
-      .subscribe(res=>{console.log(res.json());
+      .subscribe(res=>{console.log(res.json());   
 this.clubs=res.json();
+
+
       });
 
    //   navigator.geolocation.getCurrentPosition(this.setPosition,(err)=>console.log("err"+err),{timeout: 3000000});
@@ -62,6 +67,9 @@ this.apiService.sendData("http://localhost:4000/api/joinClub",this.member).subsc
       err => console.log(err),
       () => console.log('Request Complete')
     );;
+    console.log(club);
+    var data=JSON.stringify(club);
+    this.router.navigate(['api','clubs',data]);
   }
 
 }
