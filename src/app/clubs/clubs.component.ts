@@ -99,6 +99,8 @@ export class ClubsComponent implements OnInit {
   }
   ///////////////////////////join & start button///////////////////////
   condition(event) {
+    console.log(JSON.parse(localStorage.getItem('profile')));
+    
     if ((event.owner == JSON.parse(localStorage.getItem('profile')).name ||
     event.members.indexOf(JSON.parse(localStorage.getItem('profile')).name)>-1)&&this.show==true) {
       return false;

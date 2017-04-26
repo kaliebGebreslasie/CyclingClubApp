@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-clubs-near-by',
   template: `
-<<<<<<< HEAD
+
         <div *ngIf="clubs">
   <div class="well">Nearby Clubs</div>
 </div>
@@ -12,14 +12,7 @@ import { Router } from '@angular/router';
   <input class="form-control"  #myInput placeholder="Search ..." [(ngModel)]="name" (input)="filterItem(myInput.value)"/>
 
                     <li class="list-group-item" *ngFor="let club of filteredclubs" >{{club.clubname}}<span class="pull-right">
-=======
- 
-        <div class="container" *ngIf="clubs">
-  <div class="well">Nearby Clubs</div>
-</div>
-  <ul class="list-group">
-                    <li class="list-group-item" *ngFor="let club of clubs" >{{club.clubname}}<span class="pull-right">
->>>>>>> bbe222c986a8e4805fd7b1f8191bd71ff3c52a02
+
                     <button class="btn" name="join" (click)="join(club)">Join</button></span></li>
     
 </ul>
