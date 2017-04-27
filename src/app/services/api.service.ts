@@ -14,10 +14,13 @@ export class ApiService {
     return   this.authHttp.get(path);
   }
 
-  postData(path:string,data:any){
+  postData(path:string,data){
+    console.log(data+" this is from serveice");
+    
  return   this.authHttp.post(path,data);
 }
- 
+
+
  sendData(path:string,data:{}){
     let headers = new Headers({'Content-Type': 'application/json'});  
  headers.append('Authorization','Bearer ')

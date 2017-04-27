@@ -16,6 +16,7 @@ import { MemberdetailsComponent } from './memberdetails/memberdetails.component'
 
 import {StartrideComponent} from './startride/startride.component';
 import {LiverideComponent} from './liveride/liveride.component';
+import { MyclubsComponent } from './myclubs/myclubs.component';
 const MY_ROUTES: Routes = [
   //   { path: '', component: AppComponent },
 
@@ -29,15 +30,18 @@ const MY_ROUTES: Routes = [
   { path: 'api/newclub', component: NewclubComponent },
   { path: 'api/getevent', component: EventgetComponent },
 
-  { path: 'club', component: ClubsComponent },
-    { path: 'club/announcement', component: AnnouncmentpostComponent },
-    { path: 'club/userdetails', component: MemberdetailsComponent },
+   { path: 'club', component: ClubsComponent },
+   { path: 'club/announcement', component: AnnouncmentpostComponent },
+   { path: 'club/userdetails', component: MemberdetailsComponent },
    { path: 'api/startRide/:club/:event', component: ClubsComponent },
-     { path: 'club/newClub', component: NewclubComponent },
+   { path: 'club/newClub', component: NewclubComponent },
 
   { path: 'api/clubs/:club', component: ClubsComponent },
   { path: 'liveRide', component: LiverideComponent },
+  { path: 'myclubs', component: MyclubsComponent },
+  
   // { path: 'api/startRide/:club/:event', component: ClubsComponent },
+
 
 
 

@@ -51,7 +51,7 @@ myForm: FormGroup;
       "events":JSON.stringify(form.value.post1)
 
     }
-    this._service.postData("http://localhost:4000/addclub", data).subscribe(data => console.log(data.json()));
+    this._service.postData("http://localhost:4000/addclub", data).subscribe(data => console.log(data.json()+"cvbnm,xdfzgsdgfhjtyutfhjg"));
     this.router.navigate(['club'])
   } 
 

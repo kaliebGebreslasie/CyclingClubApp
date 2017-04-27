@@ -11,9 +11,11 @@ import { Router } from '@angular/router';
   <ul class="list-group">
   <input class="form-control"  #myInput placeholder="Search ..." [(ngModel)]="name" (input)="filterItem(myInput.value)"/>
 
-                    <li class="list-group-item" *ngFor="let club of filteredclubs" >{{club.clubname}}<span class="pull-right">
+     <li class="list-group-item" *ngFor="let club of filteredclubs" >{{club.clubname}}<span class="pull-right">
 
-                    <button class="btn" name="join" (click)="join(club)">Join</button></span></li>
+     <button class="btn" name="join" (click)="join(club)">Join</button></span>
+     <div class="clearfix"></div>
+     </li>
     
 </ul>
 <!--<div class="vertical-menu" *ngFor="let club of clubs">

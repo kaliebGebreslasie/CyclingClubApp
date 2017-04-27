@@ -20,16 +20,10 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 
 </div>
 <ul>        
-                 <!--   <li class="list-group-item" *ngFor="let event of events ">{{event.event}}<span class="pull-right">
-                    <button *ngIf="condition(event)"  class = "btn btn-primary" name="join" (click)="join(event)">Join</button>
-                    <button *ngIf="!condition(event)"  class = "btn btn-primary" name="join" (click)="startRide(club)">Start Ride</button></span></li>-->
-
-
- <!-- <div class="well" *ngIf="events">All Events</div>-->
-<!-- </div>-->
+                
   <ul class="list-group">
                     <li class="list-group-item" *ngFor="let event of events" >{{event.event}}<span class="pull-right">
-                    <button *ngIf="condition(event) && show"  class = "btn btn-primary" name="join" (click)="join(event)">Join</button>
+                    <button *ngIf="condition(event)"  class = "btn btn-primary" name="join" (click)="join(event)">Join</button>
                     <button *ngIf="!conditionStart(event)"  class = "btn btn-primary" name="join" (click)="startRide(event)">Start Ride</button></span></li>
 
     
@@ -57,7 +51,8 @@ export class ClubsComponent implements OnInit {
 
   event;club; eventdata; events;clubname;router; myForm: FormGroup;
   _service;
-  formCondition = false;formCondition1=false;
+  formCondition = false;
+  formCondition1=false;
   private subscription: Subscription;
   show:boolean=true;
   //showJoin:
@@ -99,10 +94,11 @@ export class ClubsComponent implements OnInit {
   }
   ///////////////////////////join & start button///////////////////////
   condition(event) {
-    console.log(JSON.parse(localStorage.getItem('profile')));
+    console.log(JSON.parse(localStorage.getItem('profile')).name);
     
-    if ((event.owner == JSON.parse(localStorage.getItem('profile')).name ||
-    event.members.indexOf(JSON.parse(localStorage.getItem('profile')).name)>-1)&&this.show==true) {
+    if ((event.owner == JSON.parse(localStorage.getItem('profile')).name )){
+    //||
+   // event.members.indexOf(JSON.parse(localStorage.getItem('profile')).name)>-1)&&this.show==true) {
       return false;
     }
     return true;

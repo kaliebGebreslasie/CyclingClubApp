@@ -21,7 +21,7 @@ import { ApiService } from '../services/api.service';
   styles: []
 })
 export class MemberdetailsComponent  {
-club;
+club;names;
 members:any[];
 userDetails;
 
@@ -32,10 +32,13 @@ activatedRoute.queryParams.subscribe(
       (param: any) => {this.club = param['club']
       console.log("entered");
       this.members= JSON.parse(this.club).memeber;
-      console.log(this.club);
-      console.log(this.members);
+   //   console.log(this.club);
+    this.names={
+     name:this.members
+   }
+      console.log(this.members+" this are members list");
       })
-  this._service.postData("http://localhost:4000/users",this.members).subscribe(data => {console.log(data.json())
+  this._service.postData("http://localhost:4000/users",this.names).subscribe(data => {console.log(data+"this is from subcribe")
 this.userDetails=data.json()
 for(let user of data.json()){
   console.log(user.picture);

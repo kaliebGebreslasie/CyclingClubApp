@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from '../services/api.service';
 import {ActivatedRoute} from '@angular/router';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-liveride',
   template: `
@@ -17,10 +18,13 @@ import {ActivatedRoute} from '@angular/router';
   <sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
 </sebm-google-map>
     </p>
+
+    <button (click)=Emergency()>Emergency Flag</button>
   `,
   styles: []
 })
 export class StartrideComponent implements OnInit {
+
 title: string = 'My first angular2-google-maps project';
   lat: number;
   
@@ -70,8 +74,9 @@ title: string = 'My first angular2-google-maps project';
   setPosition(position){
   
       //position.coords.latituted
-     
+    }
+    Emergency(){
 
-      }
+    }
 
 }
