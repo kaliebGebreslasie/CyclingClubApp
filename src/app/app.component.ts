@@ -18,7 +18,9 @@ import { AuthService } from './services/auth.service';
 //     { path: '/login', name: 'Login', component: LoginComponent }
 // ])
 export class AppComponent {
+    profile
 constructor(private auth: AuthService) {
+    this.profile=JSON.parse(localStorage.getItem('profile'));
     // window.localStorage.setItem('profile',"hello");
 }
 //   login() {
