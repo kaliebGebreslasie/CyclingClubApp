@@ -52,10 +52,10 @@ this.clubs=res.json();
 
       }
   ngOnInit() {
-  
+  this.profile=JSON.parse(localStorage.getItem('profile'));
      if(navigator.geolocation){
        let a={maximumAge:60000, timeout: 30000};
-          this.apiService.getData("http://localhost:4000/api/clubsNearBy?lat="+41.0178+"&long="+-91.966)
+          this.apiService.getData("http://localhost:4000/api/clubsNearBy?lat="+41.0178+"&long="+-91.966+"&membername="+this.profile.name)
       .subscribe(res=>{console.log(res.json());   
 this.clubs=res.json();
 this.assignCopy()

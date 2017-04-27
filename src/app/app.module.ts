@@ -26,7 +26,11 @@ import { MemberdetailsComponent } from './memberdetails/memberdetails.component'
 import { MyPipePipe } from './my-pipe.pipe';
 
 import { LiverideComponent } from './liveride/liveride.component';
+
 import { MyclubsComponent } from './myclubs/myclubs.component';
+
+import { BikersComponent } from './bikers/bikers.component';
+
 
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
@@ -89,7 +93,11 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     LiverideComponent,
 
     
+
     MyclubsComponent,
+
+    BikersComponent,
+
 
 
 

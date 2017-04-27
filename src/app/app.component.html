@@ -70,6 +70,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
         <!--      <button class="tablinks" (click)="auth.logout()" *ngIf="auth.authenticated()">Log Out</button> -->
+        <li><a href=""  *ngIf="auth.authenticated()">{{profile.name}}</a></li>
                 <li><a href="" (click)="auth.logout()" *ngIf="auth.authenticated()">Logout</a></li>
             </ul>
        </div>   
